@@ -1,3 +1,4 @@
+import java.util.Arrays;
 public class Sortsum{
     public int[] sum(int[] a, int[] b){
         int[] c = new int[a.length + b.length];
@@ -7,12 +8,21 @@ public class Sortsum{
         while(cs != c.length){
             if(a[as] < b[bs]){
                 c[cs++] = a[as++];
-            }else c[cs++] = b[bs++];
+                if(as == a.length){
+                  c[cs] = b[bs];
+                  break;}
+            }else { c[cs++] = b[bs++];
+                    if(bs == b.length){
+                      c[cs] = a[as];
+                      break;}
+                      }
         }return c;
     }
     public static void main(String args[]){
-        Numpairs np = new Numpairs();
-        int[] arr = {1,1,2,3,4};
-        System.out.println(np.pairs(arr));
+        Sortsum ss = new Sortsum();
+        int[] arr1 = {1,4,9,15,31};
+        int[] arr2 = {5,6,8,12,35};
+        int[] z = ss.sum(arr1, arr2);
+        System.out.println(Arrays.toString(z));
     }
 }
