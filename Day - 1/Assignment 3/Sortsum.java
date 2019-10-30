@@ -20,8 +20,8 @@ public class Sortsum{
     }
     public static void main(String args[]){
         Sortsum ss = new Sortsum();
-        int[] arr1 = {1,4,9,15,31};
-        int[] arr2 = {5,6,8,12,35};
+        int[] arr1 = {1,3,4,17,19};
+        int[] arr2 = {3,10,15,20,25};
         int[] z = ss.sum(arr1, arr2);
         System.out.println(Arrays.toString(z));
     }
