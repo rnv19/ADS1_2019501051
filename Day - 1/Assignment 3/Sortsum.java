@@ -6,16 +6,10 @@ public class Sortsum{
         int bs = 0;
         int cs = 0;
         while(cs != c.length){
-            if(a[as] < b[bs]){
-                c[cs++] = a[as++];
-                if(as == a.length){
-                  c[cs] = b[bs];
-                  break;}
-            }else { c[cs++] = b[bs++];
-                    if(bs == b.length){
-                      c[cs] = a[as];
-                      break;}
-                      }
+            if(as == a.length){ c[cs++] = b[bs++];
+            }else if(bs == b.length){ c[cs++] = a[as++];
+            }else if(a[as] < b[bs]){ c[cs++] = a[as++];
+            }else { c[cs++] = b[bs++];}
         }return c;
     }
     public static void main(String args[]){
