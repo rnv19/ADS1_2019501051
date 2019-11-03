@@ -34,7 +34,7 @@ public class QuickSort {
      * @param a  aray to be sorted
      * @param lo low boundary
      * @param hi high boundary
-     * @return the position where the array id divided
+     * @return the position where the array id divided  
      */
     private static int partition(final Comparable[] a, final int lo, final int hi) {
         int i = lo;
