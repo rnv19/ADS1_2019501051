@@ -13,5 +13,5 @@ class Solution {
 		MergeSort.sort(arr);
 		return arr;
 	}
-}
+} 
  

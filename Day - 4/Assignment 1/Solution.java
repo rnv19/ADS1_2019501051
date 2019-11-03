@@ -1,6 +1,7 @@
 /**
  * . solution class
  */
+import java.util.Random;
 class Solution {
 	/**
 	 * . quicksort method method takes the array and sorts the array
@@ -8,17 +9,17 @@ class Solution {
 	 * @param arr array to be sorted
 	 * @return the array thats sorted
 	 */
-	public static int[] quickSort(final int[] arr) {
-		Integer[] arr1 = new Integer[arr.length];
-		int i = 0;
-		for (int value : arr) {
-			arr1[i++] = Integer.valueOf(value);
-		}
-		QuickSort.sort(arr1);
-		int j = 0;
-		for (Integer integer : arr1) {
-			arr[j++] = integer;
-		}
-		return arr;
+	public static int[] quickSort(final Comparable[] arr) {
+	Random rand = new Random();
+	Solution s = new Solution();
+	QuickSort q = new QuickSort();
+	for(int i = 0; i < arr.length; i++){
+		int randomIndexToSwap = rand.nextInt(arr.length);
+		int temp = arr[randomIndexToSwap];
+		arr[randomIndexToSwap] = arr[i];
+		arr[i] = temp;
+	}
+	q.sort(arr, 0, arr.length-1);
+	return arr;
 	}
 }
