@@ -7,7 +7,7 @@ class Solution{
 		if(n != 1){
 			for(int i = 1; i < n; i++){
 				for(int j = i; j > 0; j--){
-					if(teams[j].compareTo(teams[j-1]) < 0){
+					if(teams[j].compareTo(teams[j-1]) > 0){
 						swap(teams, j, j-1);
 					}
 				}
@@ -45,13 +45,13 @@ class Team implements Comparable<Team> {
 	}
 
 	public int compareTo(Team team){
-		if(team.noOfWins != this.noOfWins){
-			return (team.noOfWins - this.noOfWins);
-		}else if(team.noOfLosses != this.noOfLosses){
-			return (this.noOfLosses - team.noOfLosses);
-		}else if(this.noOfDraws != team.noOfDraws){
-			return (team.noOfDraws - this.noOfDraws);
-		}else return 0;
+		if(this.noOfWins > team.noOfWins){
+			return 1;} else if(this.noOfWins < team.noOfWins){ return -1;}
+		else if(this.noOfLosses < team.noOfLosses){
+			return 1;} else if(this.noOfLosses > team.noOfLosses){ return -1;}
+		else if(this.noOfDraws > team.noOfDraws){
+			return 1;} else if(this.noOfDraws < team.noOfDraws){ return -1;}
+		else return 0;
 	}
 
 
