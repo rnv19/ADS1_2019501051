@@ -10,7 +10,7 @@ public class MergeSort {
      *
      * @param a   original array
      * @param aux copied array
-     * @param lo  low boundary
+     * @param lo  low boundary 
      * @param mid mid value
      * @param hi  high boundary
      */

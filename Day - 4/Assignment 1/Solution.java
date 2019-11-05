@@ -11,7 +11,6 @@ class Solution {
 	 */
 	public static int[] quickSort(final Comparable[] arr) {
 	Random rand = new Random();
-	Solution s = new Solution();
 	QuickSort q = new QuickSort();
 	for(int i = 0; i < arr.length; i++){
 		int randomIndexToSwap = rand.nextInt(arr.length);
