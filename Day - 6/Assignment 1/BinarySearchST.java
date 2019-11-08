@@ -127,7 +127,17 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
         return str;
     }
 
-    // public Iterable<Key> keys() {
-    //     return keys(min(), max());
-    // }
+    public Iterable<Key> keys() {
+        return keys(min(), max());
+    }
+
+    public Iterable<Key> keys(final Key lo, final Key hi) {
+
+        Queue<Key> queue = new Queue<Key>(); 
+        if (lo.compareTo(hi) > 0) return queue;
+        for (int i = rank(lo); i < rank(hi); i++) 
+            queue.enqueue(keys[i]);
+        if (contains(hi)) queue.enqueue(keys[rank(hi)]);
+        return queue; 
+    }
 }
