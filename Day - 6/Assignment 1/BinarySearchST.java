@@ -1,29 +1,25 @@
-import java.util.Arrays;
+/**
+ *
+ * @param <Key>
+ * @param <Value>
+ */
 public class BinarySearchST<Key extends Comparable<Key>, Value> {
-    
     private Value[] vals;
     private Key[] keys;
     private int n = 0;
 
-    public BinarySearchST(int cap){
-        Value[] vals = new Value[cap];
-        Key[] keys = new Key[cap];
+    public BinarySearchST(final int cap) {
+        vals = (Value[]) new Object[cap];
+        keys = (Key[]) new Comparable[cap];
     }
 
-    public boolean contains(Key key){
+    public boolean contains(final Key key) {
         int i = rank(key);
-        return i >= 0;
-    }
-
-    public Value get(Key key) {
-        if(contains(key)) {
-            return vals[key];
-        }
-        return null;
+        return keys[i].compareTo(key) == 0;
     }
 
     public Key max() {
-        return keys[n-1];
+        return keys[n - 1];
     }
 
     public boolean isEmpty() {
@@ -31,79 +27,104 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
     }
 
     public void deleteMin() {
-        if(!isEmpty()) {
-            for(int i = 0; i < n - 1; i++) {
-                keys[i] = keys[i+1];
-                vals[i] = vals[i+1];
-                n -= 1;
+        if (!isEmpty()) {
+            for (int i = 0; i < n - 1; i++) {
+                keys[i] = keys[i + 1];
+                vals[i] = vals[i + 1];
             }
+            n -= 1;
         }
     }
 
-    public Key floor(Key key) {
+    public Key floor(final Key key) {
         int i = rank(key);
-        if (i < n && key.toCompare(keys[i]) == 0){
+        if (i < n && key.compareTo(keys[i]) == 0) {
             return keys[i];
-        }else return keys[i - 1];
+        } else {
+            return keys[i - 1];
+        }
     }
 
     public void resize() {
-        if(n == vals.length) {
-            vals = Arrays.copyOf(vals, n*2);
-            keys = Arrays.copyOf(keys, n*2);
+        if (n == vals.length) {
+            Value[] tempv = (Value[]) new Object[n * 2];
+            Key[] tempk = (Key[]) new Comparable[n * 2];
+            for (int i = 0; i < n; i++) {
+                tempk[i] = keys[i];
+                tempv[i] = vals[i];
+            }
+            vals = tempv;
+            keys = tempk;
         }
     }
 
-    public void delete(Key key) {
+    public void delete(final Key key) {
         int i = rank(key);
-        if(key.toCompare(keys[i]) == 0){
-            for(int j = i; j < n; j--){
-                keys[i] = keys[i+1];
-                vals[i] = vals[i+1];
-                n -= 1;
-            }
-        } 
-        keys[n] = null;
-        vals[n] = null;
+        for (int j = i; j < n; j--) {
+            keys[j] = keys[j + 1];
+            vals[j] = vals[j + 1];
+        }
+        n -= 1;
     }
 
-    public void put(Key k, Value v){
-        if(!isEmpty()) {
-            if(v == null) {
-                delete(k);
-                return;
-            }
+    public void put(final Key k, final Value v) {
+        if (v == null) {
+            delete(k);
+            return;
+        }
+        if (isEmpty()) {
+            keys[n] = k;
+            vals[n] = v;
+            n++;
         }
         int i = rank(k);
-
-        if(i < n && k.toCompare(keys[i]) == 0) {
+        if (i < n && keys[i].compareTo(k) == 0) {
             vals[i] = v;
-        } else if(n == vals.length){
-            resize();
-            for(int j = i; j < n; j++){
-                keys[j+1] = keys[j];
-                vals[j+1] = vals[j+1];
-            }
-            keys[i] = k;
-            vals[i] = v;
-            n += 1;
+            return;
         }
+        if (n == vals.length) {
+            resize();
+        }
+        for (int j = n; j > i; j--) {
+            keys[j] = keys[j - 1];
+            vals[j] = vals[j - 1];
+        }
+        keys[i] = k;
+        vals[i] = v;
+        n += 1;
     }
-    
-    
-    public int rank(Key key) {
+    public int rank(final Key key) {
         int lo = 0;
-        int hi = n-1;
-        while(lo < hi){
-            int mid = lo + (hi - lo)/2;
-            int temp = key.toCompare(keys[mid]);
-            if(temp < 0) {
-                hi = mid-1;
-            } else if(temp > 0) {
+        int hi = n - 1;
+        while (lo <= hi) {
+            int mid = lo + (hi - lo) / 2;
+            int temp = key.compareTo(keys[mid]);
+            // System.out.println(temp);
+            if (temp < 0) {
+                hi = mid - 1;
+            } else if (temp > 0) {
                 lo = mid + 1;
-            } else return mid;
+            } else {
+                return mid;
+            }
         }
         return lo;
+    }
+
+    public Value get(final Key key) {
+        int i = rank(key);
+        if (key.compareTo(keys[i]) == 0) {
+            return vals[i];
+        }
+        return null;
+    }
+
+    public String toString() {
+        String str = "";
+        for (int i = 0; i < n; i++) {
+            str += keys[i] + " ";
+        }
+        return str;
     }
 
     // public Iterable<Key> keys() {

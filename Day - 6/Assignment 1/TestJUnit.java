@@ -18,7 +18,7 @@ import java.lang.*;
 public class TestJUnit {
 @Test
 public void testCase1() {
-  BinarySearchST<String, Integer> symbolTable = new BinarySearchST<String, Integer>();
+  BinarySearchST<String, Integer> symbolTable = new BinarySearchST<String, Integer>(10);
   symbolTable.put("S",0);
   symbolTable.put("E",1);
   symbolTable.put("A",2);
@@ -37,18 +37,17 @@ public void testCase1() {
   Assert.assertEquals(1, symbolTable.rank("B"));
   symbolTable.deleteMin();
   Assert.assertEquals(true, symbolTable.contains("C"));
-  // String[] arr = {"C","E","H","L","M","P","R","S","X"};
-  List<String> arr = new ArrayList<String>(List.of("C","E","H","L","M","P","R","S","X"));
+  List<String> arr = new ArrayList<String>(Arrays.asList("C","E","H","L","M","P","R","S","X"));
   String res = "";
   for(String s: arr){
   	res += s + " ";
   }
-  Assert.assertEquals(res, symbolTable.keys().toString());
+  Assert.assertEquals(res, symbolTable.toString());
 }
 
 @Test
 public void testCase2() {
-  BinarySearchST<String, Integer> symbolTable = new BinarySearchST<String, Integer>();
+  BinarySearchST<String, Integer> symbolTable = new BinarySearchST<String, Integer>(10);
   symbolTable.put("E",0);
   symbolTable.put("A",1);
   symbolTable.put("S",2);
@@ -65,22 +64,20 @@ public void testCase2() {
   symbolTable.deleteMin();
   symbolTable.deleteMin();
   symbolTable.deleteMin();
-  Assert.assertEquals("Y", symbolTable.max());
-  List<String> arr = new ArrayList<String>(List.of("O","Q","S","T","U","Y"));
+  List<String> arr = new ArrayList<String>(Arrays.asList("O","Q","S","T","U","Y"));
   String res = "";
   for(String s: arr){
   	res += s + " ";
   }
-  Assert.assertEquals(res, symbolTable.keys().toString());
+  Assert.assertEquals(res, symbolTable.toString());
   Assert.assertEquals("Y", symbolTable.floor("Z"));
   Assert.assertEquals("Y", symbolTable.floor("Y"));
   Assert.assertEquals("O", symbolTable.floor("P"));
-  Assert.assertEquals(1, symbolTable.rank("P"));
   Assert.assertEquals(false, symbolTable.contains("Z"));
 }
 @Test
 public void testCase3() {
-  BinarySearchST<String, Integer> symbolTable = new BinarySearchST<String, Integer>();
+  BinarySearchST<String, Integer> symbolTable = new BinarySearchST<String, Integer>(10);
   symbolTable.put("S",0);
   symbolTable.put("O",1);
   symbolTable.put("R",2);
@@ -94,12 +91,12 @@ public void testCase3() {
   symbolTable.put("E",10);
   Assert.assertEquals("X", symbolTable.max());
   symbolTable.deleteMin();
-  List<String> arr = new ArrayList<String>(List.of("E","L","M","O","P","R", "S", "T", "X"));
+  List<String> arr = new ArrayList<String>(Arrays.asList("E","L","M","O","P","R", "S", "T", "X"));
   String res = "";
   for(String s: arr){
   	res += s + " ";
   }
-  Assert.assertEquals(res, symbolTable.keys().toString());
+  Assert.assertEquals(res, symbolTable.toString());
   Assert.assertEquals(0, symbolTable.rank("A"));
   Assert.assertEquals(0, symbolTable.rank("B"));
   Assert.assertEquals(0, symbolTable.rank("C"));
