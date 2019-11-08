@@ -1,14 +1,14 @@
-import java.util.*;
+
 public class SequentialSearchST<Key, Value> {
     private int n;
     private Node first;
-    
-    private class Node {
+
+    private final class Node {
         private Key key;
         private Value val;
         private Node next;
 
-        public Node(Key key, Value val, Node next)  {
+        private Node(final Key key, final  Value val, final  Node next)  {
             this.key  = key;
             this.val  = val;
             this.next = next;
@@ -23,46 +23,62 @@ public class SequentialSearchST<Key, Value> {
         return n == 0;
     }
 
-    public Value get(Key key) {
-        for(Node x = first; x != Null; x.next) {
-            if(key.equals(x.key)){
-                return x.val;
+    public Value get(final  Key key) {
+        Value value = null;
+        for (Node x = first; x != null; x = x.next) {
+            if (key.equals(x.key)) {
+                delete(key);
+                value = x.val;
             }
-        }return null;
-    }
-
-    public void delete(Key key) {
-        for(Node x = first; x != Null; x.next) {
-            if(key.equals(x.key)) {
-                x.next = x.next.next;
-                n--;
+            if (x.next == null) {
+                Node n = new Node(key, value, null);
+                x.next = n;
+                return value;
             }
         }
-    }
- 
-    public boolean contains(Key key){
-        for(Node x = first; x != Null; x.next) {
-            if(key.equals(x.key)) {
-                return true;
-            }return false;
-        }
+        return null;
     }
 
-    public void put(Key key, Value val){
-        if( val == null) {
+    public void delete(final Key key) {
+        first = delete(first, key);
+    }
+
+    public Node delete(final Node x, final Key key) {
+        if (x == null) {
+            return null;
+        }
+        if (key.equals(x.key)) {
+            n--;
+            return x.next;
+        }
+        x.next = delete(x.next, key);
+        return x;
+    }
+
+    public boolean contains(final Key key) {
+        return get(key) != null;
+    }
+
+    public void put(final Key key, final Value val) {
+        if (val == null) {
             delete(key);
+            return;
         }
-        if(contains(key)) {
-            
+        for (Node x = first; x != null; x = x.next) {
+            if (key.equals(x.key)) {
+                x.val = val;
+                return;
+            }
         }
-
-        }
+        first = new Node(key, val, first);
+        n++;
     }
 
     public Iterable<Key> keys()  {
         Queue<Key> queue = new Queue<Key>();
-        for (Node x = first; x != null; x = x.next)
+        for (Node x = first; x != null; x = x.next) {
             queue.enqueue(x.key);
+        }
         return queue;
     }
 }
