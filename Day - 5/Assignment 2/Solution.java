@@ -1,5 +1,6 @@
 import java.util.Collections;
 import java.util.PriorityQueue;
+import java.util.Arrays;
 
 final class Solution {
 /* default constructor */
@@ -11,10 +12,10 @@ final class Solution {
                                         Collections.reverseOrder());
         double[] resultArray = new double[arr.length];
         double median = arr[0];
-        minQ.add(median);
-        resultArray[0] = median;
+        // minQ.add(median);
+        // resultArray[0] = median;
 
-        for (int i = 1; i < arr.length; i++) {
+        for (int i = 0; i < arr.length; i++) {
             if (minQ.size() > maxQ.size()) {
                 if (arr[i] > median) {
                     maxQ.add(minQ.remove());
@@ -45,8 +46,8 @@ final class Solution {
         return resultArray;
     }
 
-// 	public static void main(String[] args) {
-// 		double[] arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-// 		System.out.println(Arrays.toString(dynamicMedian(arr)));
-// }
+	public static void main(String[] args) {
+		double[] arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+		System.out.println(Arrays.toString(dynamicMedian(arr)));
+}
 }
