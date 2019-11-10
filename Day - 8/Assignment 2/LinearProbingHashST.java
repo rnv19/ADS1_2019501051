@@ -1,5 +1,4 @@
 public class LinearProbingHashST<Key, Value> {
-    private static final int INIT_CAPACITY = 4;
 
     private int n;           // number of key-value pairs in the symbol table
     private int m;           // size of linear probing table
@@ -97,6 +96,22 @@ public class LinearProbingHashST<Key, Value> {
         }
         n--;
     }
+
+    public String toString() {
+        String s = "{";
+        if (this.size() != 0) {
+          for (Key s1:this.keys()) {
+          s += s1 + ":";
+          s += this.get(s1) + ", ";
+        }
+          return s.substring(0, s.length() - 2) + "}";  
+        } else {
+          return s + "}";
+        }
+        
+    }
+
+
     public Iterable<Key> keys() {
         Queue<Key> queue = new Queue<Key>();
         for (int i = 0; i < m; i++)
