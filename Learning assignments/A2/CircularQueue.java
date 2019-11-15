@@ -20,6 +20,10 @@ public class CircularQueue<Item> {
         return size == 0;
     }
 
+    /**
+     * All cases: Constant time
+     * @param item which is to be added to the queue
+     */
     public void enqueue(Item item) {
         if(item == null) throw new IllegalArgumentException("Cannot add null item");
         Node newNode = new Node();
@@ -37,6 +41,10 @@ public class CircularQueue<Item> {
         }
     }
 
+    /**
+     * All cases: Constant time
+     * @return Item which is removed from queue
+     */
     public Item dequeue() {
         if(size == 0) throw new NoSuchElementException("Empty queue");
         if(size == 1) {
