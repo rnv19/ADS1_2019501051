@@ -24,7 +24,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         }
         arr = temp;
     }
-
+ 
     // return the number of items on the randomized queue
     public int size() {
         return size;

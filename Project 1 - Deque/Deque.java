@@ -139,7 +139,7 @@ public class Deque<Item> implements Iterable<Item> {
                 
                 return item;
             }
-        }
+        } 
     
         // unit testing (required)
         public static void main(String[] args) {

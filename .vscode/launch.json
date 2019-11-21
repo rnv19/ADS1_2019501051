@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - LinearProbingHashST",
+            "request": "launch",
+            "mainClass": "LinearProbingHashST",
+            "projectName": "ADS1_2019501051_10fc0174"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - Numpairs",
             "request": "launch",
             "mainClass": "Numpairs"
